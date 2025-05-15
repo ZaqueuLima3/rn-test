@@ -2,11 +2,13 @@ import React from 'react';
 import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native';
 
 import { Product } from '@/src/domain/model/Product';
+import { useRouter } from 'expo-router';
 import { CategoryFilter } from '../components/CategoryFilter';
 import { ProductCard } from '../components/ProductCard';
 import { useProductViewModel } from './viewmodels/ProductViewModel';
 
 export const ProductListScreen: React.FC = () => {
+  const router = useRouter();
   const {
     products,
     categories,
@@ -20,7 +22,12 @@ export const ProductListScreen: React.FC = () => {
     selectCategory,
   } = useProductViewModel();
 
-  const handleProductPress = (productId: number) => {};
+  const handleProductPress = (productId: number) => {
+    router.push({
+      pathname: '/product',
+      params: { id: productId },
+    });
+  };
 
   const renderItem = ({ item }: { item: Product }) => (
     <ProductCard product={item} onPress={() => handleProductPress(item.id)} />

@@ -1,5 +1,8 @@
 import { productApi } from '@/src/data/remote/api/productApi';
-import { mapProductListToDomain } from '@/src/data/remote/model/ProductResponse';
+import {
+  mapProductListToDomain,
+  mapProductToDomain,
+} from '@/src/data/remote/model/ProductResponse';
 import { Category } from '@/src/domain/model/Category';
 import { Product } from '@/src/domain/model/Product';
 import { IProductRepository } from '@/src/domain/repositories/ProductRepository';
@@ -37,6 +40,16 @@ export class ProductRepository implements IProductRepository {
       return response.map(mapCategoryResponseToDomain);
     } catch (error) {
       console.error('Category request error:', error);
+      throw error;
+    }
+  }
+
+  async getProductById(id: number): Promise<Product | null> {
+    try {
+      const response = await productApi.getProductById(id);
+      return mapProductToDomain(response);
+    } catch (error) {
+      console.error(`Product request with ID ${id} failed:`, error);
       throw error;
     }
   }

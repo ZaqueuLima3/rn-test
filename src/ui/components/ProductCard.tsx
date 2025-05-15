@@ -34,9 +34,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onPress }) =>
           </View>
 
           {product.stock > 0 ? (
-            <Text style={styles.inStock}>Em estoque</Text>
+            <Text style={styles.inStock}>In Stock</Text>
           ) : (
-            <Text style={styles.outOfStock}>Indisponível</Text>
+            <Text style={styles.outOfStock}>Out of Stock</Text>
           )}
         </View>
       </View>

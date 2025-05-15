@@ -5,7 +5,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: 1,
-      refetchOnWindowFocus: false, // Melhor para mobile
+      refetchOnWindowFocus: false,
       staleTime: 5 * 60 * 1000,
     },
   },
@@ -16,7 +16,7 @@ export default function RootLayout() {
     <QueryClientProvider client={queryClient}>
       <Stack>
         <Stack.Screen name="index" options={{ title: 'Products' }} />
-        <Stack.Screen name="product" options={{ title: 'Product' }} />
+        <Stack.Screen name="product" options={{ title: '' }} />
       </Stack>
     </QueryClientProvider>
   );

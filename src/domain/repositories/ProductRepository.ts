@@ -14,4 +14,6 @@ export interface IProductRepository {
   }>;
 
   getCategories(): Promise<Category[]>;
+
+  getProductById(id: number): Promise<Product | null>;
 }

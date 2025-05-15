@@ -1,6 +1,6 @@
 import { dummyApiClient } from '@/src/data/remote/http/httpClient';
 import { CategoryResponse } from '@/src/data/remote/model/CategoryResponse';
-import { ProductListResponse } from '@/src/data/remote/model/ProductResponse';
+import { ProductListResponse, ProductResponse } from '@/src/data/remote/model/ProductResponse';
 
 export const productApi = {
   getProducts: (limit = 30, skip = 0) =>
@@ -12,4 +12,6 @@ export const productApi = {
     dummyApiClient.get<ProductListResponse>(
       `/products/category/${category}?limit=${limit}&skip=${skip}`
     ),
+
+  getProductById: (id: number) => dummyApiClient.get<ProductResponse>(`/products/${id}`),
 };
