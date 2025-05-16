@@ -2,7 +2,7 @@
 
 This project implements a React Native e-commerce application using the MVVM (Model-View-ViewModel) pattern combined with Clean Architecture. This architecture is widely used in native Android development and has been adapted for React Native to provide a scalable, maintainable, and testable codebase.
 
-![Sample](/docs/rn-test.gif)
+<img src="/docs/rn-test.gif" alt="Sample" width="300" />
 
 ## Architecture Overview
 
