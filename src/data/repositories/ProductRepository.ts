@@ -1,14 +1,16 @@
-import { productApi } from '@/src/data/remote/api/productApi';
+import { IProductApi } from '@/src/data/remote/api/IProductApi';
 import {
   mapProductListToDomain,
   mapProductToDomain,
 } from '@/src/data/remote/model/ProductResponse';
 import { Category } from '@/src/domain/model/Category';
 import { Product } from '@/src/domain/model/Product';
-import { IProductRepository } from '@/src/domain/repositories/ProductRepository';
+import { IProductRepository } from '@/src/domain/repositories/IProductRepository';
 import { mapCategoryResponseToDomain } from '../remote/model/CategoryResponse';
 
 export class ProductRepository implements IProductRepository {
+  constructor(private readonly productApi: IProductApi) {}
+
   async getProducts(
     page: number = 1,
     limit: number = 30,
@@ -23,8 +25,8 @@ export class ProductRepository implements IProductRepository {
 
     try {
       const response = category
-        ? await productApi.getProductsByCategory(category, limit, skip)
-        : await productApi.getProducts(limit, skip);
+        ? await this.productApi.getProductsByCategory(category, limit, skip)
+        : await this.productApi.getProducts(limit, skip);
 
       return mapProductListToDomain(response);
     } catch (error) {
@@ -35,7 +37,7 @@ export class ProductRepository implements IProductRepository {
 
   async getCategories(): Promise<Category[]> {
     try {
-      const response = await productApi.getCategories();
+      const response = await this.productApi.getCategories();
 
       return response.map(mapCategoryResponseToDomain);
     } catch (error) {
@@ -46,7 +48,7 @@ export class ProductRepository implements IProductRepository {
 
   async getProductById(id: number): Promise<Product | null> {
     try {
-      const response = await productApi.getProductById(id);
+      const response = await this.productApi.getProductById(id);
       return mapProductToDomain(response);
     } catch (error) {
       console.error(`Product request with ID ${id} failed:`, error);

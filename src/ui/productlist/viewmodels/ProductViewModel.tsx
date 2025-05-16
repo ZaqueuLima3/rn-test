@@ -1,6 +1,8 @@
-import { ProductRepository } from '@/src/data/repositories/ProductRepository';
+import { useInjection } from '@/src/di/hooks/hooks';
+import { DI_TOKENS } from '@/src/di/tokens';
 import { Category } from '@/src/domain/model/Category';
 import { Product } from '@/src/domain/model/Product';
+import { IProductRepository } from '@/src/domain/repositories/IProductRepository';
 import { useInfiniteQuery, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { createContext, ReactNode, useCallback, useMemo, useState } from 'react';
 
@@ -38,7 +40,7 @@ export const ProductViewModelProvider: React.FC<{
   const [selectedCategory, setSelectedCategory] = useState<string | undefined>(undefined);
   const queryClient = useQueryClient();
 
-  const repository = useMemo(() => new ProductRepository(), []);
+  const repository = useInjection<IProductRepository>(DI_TOKENS.PRODUCT_REPOSITORY);
 
   const {
     data: categories,

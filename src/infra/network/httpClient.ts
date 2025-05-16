@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import { IHttpClient } from './IHttpClient';
 
-export class HttpClient {
+export class HttpClient implements IHttpClient {
   private readonly axiosInstance: AxiosInstance;
 
   constructor(baseURL: string) {
@@ -26,5 +27,3 @@ export class HttpClient {
     return response.data;
   }
 }
-
-export const dummyApiClient = new HttpClient('https://dummyjson.com');

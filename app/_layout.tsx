@@ -1,6 +1,8 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Stack } from 'expo-router';
 
+import 'reflect-metadata';
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
